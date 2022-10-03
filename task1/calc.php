@@ -37,7 +37,13 @@ if ($_POST) {
         }
 
     
-    } else if (strlen($firstNum) > 0) {
+    } else {
+        
+        $message = "<div class='alert alert-danger'>" . "Please Enter Valid Data" . "</div>";
+
+    }
+
+    if (strlen($firstNum) > 0) {
 
         switch ($ope) {
             case "bin2dec":
@@ -49,10 +55,6 @@ if ($_POST) {
                 $message = "<div class='alert alert-secondary'>". $firstNum . "=> " . $final ."</div>";
                 break;
         }
-
-    } else {
-        
-        $message = "<div class='alert alert-danger'>" . "Please Enter Valid Data" . "</div>";
 
     }
 
