@@ -34,6 +34,12 @@ if ($_POST) {
                 $final = $firstNum % $secondNum;
                 $message = "<div class='alert alert-success'>". $firstNum . " % " . $secondNum . " = " . $final ."</div>";
                 break;
+        }
+
+    
+    } else if (strlen($firstNum) > 0) {
+
+        switch ($ope) {
             case "bin2dec":
                 $final = bindec($firstNum);
                 $message = "<div class='alert alert-success'>". $firstNum . "=> " . $final ."</div>";
@@ -44,7 +50,6 @@ if ($_POST) {
                 break;
         }
 
-    
     } else {
         
         $message = "<div class='alert alert-danger'>" . "Please Enter Valid Data" . "</div>";
