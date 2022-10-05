@@ -66,16 +66,6 @@ $users = [
     ]
 ];
 
-// echo $users[0]-> activities['school']
-
-
-// foreach ($users as $key => $value) {
-//     echo "<br>";
-//     echo "<pre>";
-//     // print_r($value);
-//     echo $value -> gender -> gender ;
-//     echo "</pre>";
-// }
 
 
 ?>
