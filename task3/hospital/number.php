@@ -1,6 +1,6 @@
 <?php
 
-$title = 'number';
+$title = 'number | Hospital';
 include "includes/header.php";
 include "includes/navbar.php";
 

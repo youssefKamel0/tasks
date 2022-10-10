@@ -1,6 +1,6 @@
 <?php
 
-$title = 'result';
+$title = 'result | Club';
 include "includes/header.php";
 include "includes/navbar.php";
 

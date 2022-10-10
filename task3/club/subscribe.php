@@ -1,6 +1,6 @@
 <?php
 
-$title = 'subscribe';
+$title = 'subscribe | Club';
 include "includes/header.php";
 include "includes/navbar.php";
 
@@ -8,11 +8,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $username = $_POST['username'];
     $familyNum = $_POST['count'];
+    // first letter
+    $familyNum_firstLetter = substr($familyNum, 0, 1);
 
 
-    if (empty($username) || empty($familyNum)) {
 
-        $message = '<div class="alert alert-danger"> Please Enter Data  </div>';
+
+    if (empty($username) || empty($familyNum) || $familyNum_firstLetter == 0) {
+
+        $message = '<div class="alert alert-danger"> Please Enter Valid Data  </div>';
     } else {
 
         $_SESSION['familyData'] = $_POST;
@@ -49,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                                             <label>Club subscriber<span class="text-danger">*</span></label>
                                             <div class="input-group">
                                                 <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
-                                                <input type="text" name="username" class="form-control" placeholder="Enter Your Name">
+                                                <input type="text" name="username" value="<?= $username ?? "" ?>" class="form-control" placeholder="Enter Your Name">
                                             </div>
                                             <small>Note: club subscription starts with 10,000Egp </small>
                                         </div>
