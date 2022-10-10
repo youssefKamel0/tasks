@@ -2,6 +2,17 @@
 
 session_start();
 
+$questions = [
+    'cleanliness' => 'Are You Satisfied with the level of cleanliness ?',
+    'Prices' => 'Are You Satisfied with the Service Prices ?',
+    'nursing' => 'Are You Satisfied with the nursing service ?',
+    'doctors' => 'Are You Satisfied with the level of the doctors ?',
+    'calmness' => 'Are You Satisfied with the calmness in the hospital ?',
+    // 'calmness2' => 'Are You Satisfied with the calmness in the hospital ?',
+];
+
+define("grade", (count($questions) * 10 ) )
+
 ?>
 
 <!doctype html>

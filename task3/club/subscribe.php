@@ -4,30 +4,25 @@ $title = 'subscribe';
 include "includes/header.php";
 include "includes/navbar.php";
 
-if($_SERVER['REQUEST_METHOD'] == "POST") {
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $username = $_POST['username'];
     $familyNum = $_POST['count'];
 
-    foreach( $username as $key => $n ) {
 
-        if (empty($n) || empty($familyNum[$key])) {
+    if (empty($username) || empty($familyNum)) {
 
-            $message = '<div class="alert alert-danger"> Please Enter Data  </div>';
-    
-        } else {
-    
-            $_SESSION['familyData'] = $_POST;
-            header('location:games.php');
-            die;
-    
-    
-        }
+        $message = '<div class="alert alert-danger"> Please Enter Data  </div>';
+    } else {
 
+        $_SESSION['familyData'] = $_POST;
+        print_r($_SESSION);
+        header('location:games.php');
+        die;
     }
-
-
 }
+
+
 
 
 ?>
@@ -47,42 +42,42 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
                                     <h2 class="fs-1">Welcome To Our Club!</h2>
                                 </div>
                             </div>
-            <div class="col-md-7 pe-0">
-                <div class="form-left h-100 py-5 px-5">
-                    <form action="" class="row g-4" method="POST">
-                        <div class="col-12">
-                            <label>Club subscriber<span class="text-danger">*</span></label>
-                            <div class="input-group">
-                                <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
-                                <input type="text" name="username[]" class="form-control" placeholder="Enter Your Name">
-                            </div>
-                            <small>Note: club subscription starts with 10,000Egp </small>
-                        </div>
-                        <div class="col-12">
-                            <label>Count Of Family Members<span class="text-danger">*</span></label>
-                            <div class="input-group">
-                                <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
-                                <input type="number" name="count[]" class="form-control" placeholder="Enter number">
-                            </div>
-                            <small>Note: Every Member Costs 2,500Egp </small>
-                        </div>
+                            <div class="col-md-7 pe-0">
+                                <div class="form-left h-100 py-5 px-5">
+                                    <form action="" class="row g-4" method="POST">
+                                        <div class="col-12">
+                                            <label>Club subscriber<span class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
+                                                <input type="text" name="username" class="form-control" placeholder="Enter Your Name">
+                                            </div>
+                                            <small>Note: club subscription starts with 10,000Egp </small>
+                                        </div>
+                                        <div class="col-12">
+                                            <label>Count Of Family Members<span class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <div class="input-group-text"><i class="bi bi-person-fill"></i></div>
+                                                <input type="number" name="count" class="form-control" placeholder="Enter number">
+                                            </div>
+                                            <small>Note: Every Member Costs 2,500Egp </small>
+                                        </div>
 
-                        <div class="col-sm-6">
-                            <?= $message ?? "" ?>
-                        </div>
+                                        <div class="col-sm-6">
+                                            <?= $message ?? "" ?>
+                                        </div>
 
-                        <div class="col-12">
-                            <button name="submit" class="btn btn-light btn-lg px-4 float-end mt-4">Subscribe</button>
+                                        <div class="col-12">
+                                            <button class="btn btn-light btn-lg px-4 float-end mt-4">Subscribe</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+                    </div>
 
 </main>
 
-<?php 
+<?php
 
 
 include "includes/footer.php";

@@ -9,7 +9,7 @@ if (isset($_SESSION['user'])) {
 
     if (isset($_SESSION['sur'])) {
 
-        if ($_SESSION['sur'] > 25) {
+        if ($_SESSION['sur'] > grade/2) {
 
             $message = '<div class="alert alert-success"> Thank You For Your Time </div>';
 

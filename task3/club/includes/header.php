@@ -2,6 +2,28 @@
 
 session_start();
 
+$games = [
+    'football' => 300,
+    'swimming' => 250,
+    'vollyball' => 150,
+    'others' => 100,
+    // 'others2' => 50,
+    // 'others3' => 25,
+
+] ;
+
+
+// use it in reult.php line 112
+$games2 = [
+    'football' => 'football',
+    'swimming' => 'swimming',
+    'vollyball' => 'vollyball',
+    'others' => 'others',
+    // 'others2' => 'others2',
+    // 'others3' => 'others3',
+
+] ;
+
 ?>
 
 <!doctype html>
@@ -28,6 +50,7 @@ session_start();
         .getRight{
             position: absolute;
             right: -6px;
+            color: red;
         }
         
         a {

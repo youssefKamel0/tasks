@@ -4,20 +4,29 @@ $title = 'result';
 include "includes/header.php";
 include "includes/navbar.php";
 
+// check if user passed from first page 
 if (isset($_SESSION['familyData'])) {
 
+    // check if user Enter all data => members names and their games
     if (isset($_SESSION['familyMembersAllData'])) {
 
+        // get session data and store it in variable
         $fullData = $_SESSION['familyMembersAllData'];
-        $subscriber = $_SESSION['familyData']['username'][0];
-        $numberOfFamilyUsers = $_SESSION['familyData']['count'][0];
-        
+
+        // get subscriber name
+        $subscriber = $_SESSION['familyData']['username'];
+
+        // get number Of Family Users
+        $numberOfFamilyUsers = $_SESSION['familyData']['count'];
+
+        // get every member and store it in variable ===> $member1 = $session['member']  => line 88
         for ($i = 1; $i < $numberOfFamilyUsers + 1; $i++) {
         
             ${"member" . $i} = $fullData['member' . $i];
         
         }
         
+        // destroy everything if user click subscribe again
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
@@ -53,51 +62,54 @@ if (isset($_SESSION['familyData'])) {
                 <div class="col-lg-10 offset-lg-1">
                     <h3 class="mb-3 text-center">Your Subscription Details</h3>
                     <table class="table" style="color: #fff;">
-                        <thead style="background-color: #1c1f1d;">
+                        <thead style="background-color: #1c1f1d; position: relative;">
                             <tr>
-                                <th>subscriber</th>
-                                <th><?= $subscriber ?></th>
+                            <th>subscriber</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                                <!-- print Club subscriber -->
+                                <th style="position: absolute;right: -2px;"><?= $subscriber ?></th>
                             </tr>
                         </thead>
                         <tbody style="position: relative;">
+
                             <?php
-                            $footballTotalPrice = 0 ;
-                            $swimmingTotalPrice = 0 ;
-                            $vollyballTotalPrice = 0 ;
-                            $othersTotalPrice = 0 ;
+
+                            // this loops to make variable and get total price to every game => another explain 
+                            foreach ($games as $game => $price) {
+                                // $key = football, vollyball .... ======>>> $key."TotalPrice" = $footballTotalPrice , vollyballTotalPrice ..... and so on
+                                ${$game . "TotalPrice"} = 0 ;
+
+                            }
+                            // Total Games Price
                             $totalGamesPrice = 0 ;
+                            // total price without games price
                             $totalClubSubscription = 10000 + ($numberOfFamilyUsers * 2500) ;
+
+                            // loop to print every member 
                             for ($i = 1 ; $i < $numberOfFamilyUsers + 1 ; $i++) { ?>
                                 <tr>
                                     <td><?= ${"member" . $i} ?></td>
                                         <?php
 
+                                            // this variable to get total games price for every member
                                             $price = 0;
 
                                             if (isset($fullData['membergames' . $i])) {
 
-
+                                                // get total value for each game 
                                                 foreach ($fullData['membergames' . $i] as $key => $value) {
                                                     
                                                     $price += $value;
                                                     $totalGamesPrice += $value;
 
-                                                    if ($key =='football') {
+                                                    if ($key == $games2[$key] ) {
 
-                                                        $footballTotalPrice += 300;
+                                                        ${$key . "TotalPrice"} += $value;
                                                         
-                                                    } elseif ($key =='swimming') {
-
-                                                        $swimmingTotalPrice += 250 ;
-
-                                                    } elseif ($key =='vollyball') {
-
-                                                        $vollyballTotalPrice += 150 ;
-
-                                                    } elseif ($key =='others') {
-
-                                                        $othersTotalPrice += 100 ;
-
                                                     }
                                                     
                                                 ?>
@@ -127,23 +139,31 @@ if (isset($_SESSION['familyData'])) {
 
 
                     <hr>
+                    <!-- another table ==> no description needed -->
                     <table class="table" style="color: #fff;">
                         <thead>
                             <tr>
-                            <th>Football club</th>
-                            <th>Swimming club</th>
-                            <th>vollyball club</th>
-                            <th>others club</th>
-                            <th>club Subscription </th>
-                            <th>Total Price </th>
+                                <?php
+                                
+                                foreach ($games as $game => $price) { ?>
+
+                                    <th><?= $game . " Club" ?> </th>
+
+                                <?php } ?>
+                                <th>club Subscription </th>
+                                <th>Total Price </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <th><?= $footballTotalPrice . "EGP" ?></th>
-                                <th><?= $swimmingTotalPrice . "EGP" ?></th>
-                                <th><?= $vollyballTotalPrice . "EGP" ?></th>
-                                <th><?= $othersTotalPrice . "EGP" ?></th>
+                                <?php
+
+                                foreach ($games as $game => $price) { ?>
+
+                                    
+                                    <th><?= ${$game . "TotalPrice"} . "EGP" ; ?></th>
+
+                                <?php }?>
                                 <th><?= $totalClubSubscription . "EGP" ?></th>
                                 <th><?= $totalSubscriptionPrice_withGames . "EGP" ?></th>
                             </tr>
@@ -154,7 +174,7 @@ if (isset($_SESSION['familyData'])) {
 
                     <form action="" class="row g-4" method="POST">
                         <div class="col-12">
-                            <button name="submit" class="btn btn-1 btn-primary px-4 float-end mt-4">Another Subscribe</button>
+                            <button class="btn btn-1 btn-primary px-4 float-end mt-4">Another Subscribe</button>
                         </div>
                     </form>
                 </div>

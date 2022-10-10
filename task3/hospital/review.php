@@ -4,6 +4,8 @@ $title = "review";
 include "includes/header.php";
 include "includes/navbar.php";
 
+
+
 if (isset($_SESSION['user'])) {
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -17,7 +19,6 @@ if (isset($_SESSION['user'])) {
             $doctors = $_POST['doctors'];
             $calmness = $_POST['calmness'];
             $total = $cleanliness + $Prices + $nursing + $doctors + $calmness;
-            define("grade", 50);
             $_SESSION['sur'] = $total;
             header("location:result.php");
 
@@ -44,125 +45,37 @@ if (isset($_SESSION['user'])) {
                         <div class="col-md-7 pe-0" style="width: 100%;">
                             <div class="form-left h-100 py-5 px-5">
                                 <form action="" method="POST">
+
+                                    <?php 
+
+                                    foreach($questions as $key => $question) { ?>
+
                                     <div class="bcont" style="display: flex;flex-direction: row;justify-content: space-between;align-items: center; margin-bottom: 1rem;">
                                         <div>
-                                            <span>Are You Satisfied with the level of cleanliness ?</span>
+                                            <span><?= $question ?></span>
                                         </div>
                                         <div class="cont">
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="cleanliness" value="0">
+                                                <input class="form-check-input" type="radio" name="<?= $key ?>" value="0">
                                                 <label class="form-check-label" for="inlineRadio1">bad</label>
                                             </div>
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="cleanliness" value="3">
+                                                <input class="form-check-input" type="radio" name="<?= $key ?>" value="3">
                                                 <label class="form-check-label" for="inlineRadio2">good</label>
                                             </div>
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="cleanliness" value="5">
+                                                <input class="form-check-input" type="radio" name="<?= $key ?>" value="5">
                                                 <label class="form-check-label" for="inlineRadio1">very good</label>
                                             </div>
                                             <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="cleanliness" value="10">
+                                                <input class="form-check-input" type="radio" name="<?= $key ?>" value="10">
                                                 <label class="form-check-label" for="inlineRadio2">excellent</label>
                                             </div>
                                         </div>
                                     </div>
                                     <hr>
-                                    <div class="bcont" style="display: flex;flex-direction: row;justify-content: space-between;align-items: center; margin-bottom: 1rem;">
-                                        <div>
-                                            <span>Are You Satisfied with the Service Prices ?</span>
-                                        </div>
-                                        <div class="cont">
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="Prices" value="0">
-                                                <label class="form-check-label" for="inlineRadio1">bad</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="Prices" value="3">
-                                                <label class="form-check-label" for="inlineRadio2">good</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="Prices" value="5">
-                                                <label class="form-check-label" for="inlineRadio1">very good</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="Prices" value="10">
-                                                <label class="form-check-label" for="inlineRadio2">excellent</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="bcont" style="display: flex;flex-direction: row;justify-content: space-between;align-items: center; margin-bottom: 1rem;">
-                                        <div>
-                                            <span>Are You Satisfied with the nursing service ?</span>
-                                        </div>
-                                        <div class="cont">
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="nursing" value="0">
-                                                <label class="form-check-label" for="inlineRadio1">bad</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="nursing" value="3">
-                                                <label class="form-check-label" for="inlineRadio2">good</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="nursing" value="5">
-                                                <label class="form-check-label" for="inlineRadio1">very good</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="nursing" value="10">
-                                                <label class="form-check-label" for="inlineRadio2">excellent</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="bcont" style="display: flex;flex-direction: row;justify-content: space-between;align-items: center; margin-bottom: 1rem;">
-                                        <div>
-                                            <span>Are You Satisfied with the level of the doctors ?</span>
-                                        </div>
-                                        <div class="cont">
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="doctors" value="0">
-                                                <label class="form-check-label" for="inlineRadio1">bad</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="doctors" value="3">
-                                                <label class="form-check-label" for="inlineRadio2">good</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="doctors" value="5">
-                                                <label class="form-check-label" for="inlineRadio1">very good</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="doctors" value="10">
-                                                <label class="form-check-label" for="inlineRadio2">excellent</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <div class="bcont" style="display: flex;flex-direction: row;justify-content: space-between;align-items: center; margin-bottom: 1rem;">
-                                        <div>
-                                            <span>Are You Satisfied with the calmness in the hospital ?</span>
-                                        </div>
-                                        <div class="cont">
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="calmness" value="0">
-                                                <label class="form-check-label" for="inlineRadio1">bad</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="calmness" value="3">
-                                                <label class="form-check-label" for="inlineRadio2">good</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="calmness" value="5">
-                                                <label class="form-check-label" for="inlineRadio1">very good</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="calmness" value="10">
-                                                <label class="form-check-label" for="inlineRadio2">excellent</label>
-                                            </div>
-                                        </div>
-                                    </div>
+
+                                    <?php } ?>
 
                                     <div class="col-sm-6">
                                         <?= $message ?? "" ?>
